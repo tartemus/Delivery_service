@@ -1,0 +1,29 @@
+def min_platforms(robots: list[int], limit: int) -> int:
+    """
+    Определить минимальное количество транспортных платформ,
+    необходимое для перевозки всех роботов.
+
+    Яндекс Контест ID: 117542536
+
+    """
+    # Сортировка массива весов роботов по возрастанию
+    robots.sort()
+
+    # Инициализация переменных
+    platforms = 0  # Количество платформ
+    left = 0  # Левая граница текущей платформы
+    right = len(robots) - 1  # Правая граница текущей платформы
+
+    # Проход по массиву весов роботов
+    while left <= right:
+        if left < right and robots[left] + robots[right] <= limit:
+            left += 1
+        platforms += 1
+        right -= 1
+
+    return platforms
+
+
+robots = list(map(int, input().split()))
+limit = int(input())
+print(min_platforms(robots, limit))
